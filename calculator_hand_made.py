@@ -6,8 +6,6 @@ index_dat = 1
 index_operator = 0
 
 str_ing = ""
-
-
 def func_appnd(a):
     global index_dat
     global index_operator
@@ -43,9 +41,14 @@ def func_appnd(a):
             var_str.set(str_ing)
     except IndexError:
         var_str.set('number vared knid')
+
     
-
-
+    
+    
+    
+    
+    
+    
 def func_delet(*args):
     global var_str
     global str_ing
@@ -75,7 +78,7 @@ def func_ful_delet():
     str_ing = ""
     var_str.set(str_ing)
     
-
+    
 list_str = [["(", lambda: func_appnd('(')], [")", lambda: func_appnd(")")],\
     ["\U000025C0", lambda: func_delet()], ["\U00002797", lambda: func_appnd("/")],\
         ["7", lambda: func_appnd('7')], ["8",lambda: func_appnd("8")], ["9", lambda: func_appnd("9")],\
@@ -84,7 +87,6 @@ list_str = [["(", lambda: func_appnd('(')], [")", lambda: func_appnd(")")],\
                     [ "2" ,lambda: func_appnd('2')],[ "3" ,lambda: func_appnd("3")], ["\U00002795" ,lambda: func_appnd('+')],\
                         ["." ,lambda: func_appnd(".")],[ "0" ,lambda: func_appnd('0')],["\U000023EA" ,\
                             lambda: func_ful_delet()],[ "=" ,lambda: natije()]]
-
 
 windo = tk.Tk()
 
@@ -98,17 +100,24 @@ lbl_1.grid(row=0,column=0,columnspan=4)
 lbl_2 = tk.Label(textvariable=var_str,justify='right',bd=40,bg="#CADCEF",font=('Jokerman', 16))
 lbl_2.grid(row=1,columnspan=4,)
 
+
 l = -1
 for i,j in list_str :
     l = l + 1
     a = "#BBC3CC"
-
-
+    if i in ["\U00002797", "\U00002716", "\U00002796", "\U00002795", "="]:
+        a = '#5093CD'
+    if i in ["\U000025C0", "\U000023EA"]:
+        a = '#796363' 
+    if i == "\U000025C0":
+        windo.bind('<Button-3>', func_delet)
+    if i == "=":
+        windo.bind('<Return>', natije)
 
 
 
 # -----------------------------
-    tk.Button(master=windo,background=a, height=1,width=5,bd=4,relief=tk.RIDGE, text=i, font=('Bauhaus 93', 16),command=j,).grid(sticky='we',row= ( 2 + l // 4),padx=1, pady=4, column= l % 4)
-
+    tk.Button(master=windo,background=a, height=1,width=5,bd=4,relief=tk.RIDGE, text=i, font=('Jokerman', 16),command=j,).grid(sticky='we',row= ( 2 + l // 4),padx=1, pady=4, column= l % 4)
 
 tk.mainloop()
+
